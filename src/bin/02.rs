@@ -1,36 +1,26 @@
-use std::fmt::{Display, Formatter};
-
 advent_of_code::solution!(2);
 
-pub fn part_one(input: &str) -> Option<u32> {
+pub fn part_one(input: &str) -> Option<usize> {
     let result = read_input(input)
         .into_iter()
         .filter(|report| is_safe(report))
         .count();
-    Some(result as u32)
+    Some(result)
 }
 
-pub fn part_two(input: &str) -> Option<u32> {
+pub fn part_two(input: &str) -> Option<usize> {
     let result = read_input(input)
         .into_iter()
         .filter(|report| is_safe_skipping_one(&report))
         .count();
-    Some(result as u32)
+    Some(result)
 }
 
-fn is_safe<'i, T: IntoIterator<Item = &'i i32>>(levels: T) -> bool {
-    use itertools::Itertools;
-    let mut levels_iter = levels.into_iter().tuple_windows().peekable();
-    let Some((first, second)) = levels_iter.peek() else {
-        return true;
-    };
-    let is_increasing = second > first;
-    levels_iter.all(|(first, second)| {
-        let diff = second.abs_diff(*first);
-        diff >= 1 && diff <= 3 && (second > first) == is_increasing
-    })
+fn is_safe(report: &Vec<i32>) -> bool {
+    let check_asc = || report.is_sorted_by(|a, b| a < b && a.abs_diff(*b) <= 3);
+    let check_desc = || report.is_sorted_by(|a, b| a > b && a.abs_diff(*b) <= 3);
+    check_asc() || check_desc()
 }
-
 
 fn is_safe_skipping_one(report: &Vec<i32>) -> bool {
     if is_safe(report) {
@@ -38,13 +28,14 @@ fn is_safe_skipping_one(report: &Vec<i32>) -> bool {
     }
 
     for skip in 0..report.len() {
-        let levels_iter = report
+        let slice: Vec<i32> = report
             .iter()
             .enumerate()
-            .filter(|(idx, _)| *idx != skip)
-            .map(|(_, level)| level);
+            .filter(|(i, _)| *i != skip)
+            .map(|(_, &num)| num)
+            .collect();
 
-        if is_safe(levels_iter) {
+        if is_safe(&slice) {
             return true;
         }
     }
@@ -63,29 +54,21 @@ fn read_input(input: &str) -> Vec<Vec<i32>> {
         .collect()
 }
 
-struct SafetyReport {
-    result: Vec<bool>,
-}
-
-impl Display for SafetyReport {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self.result)
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_part_one() {
-        let result = part_one(&advent_of_code::template::read_file("inputs", DAY)).unwrap();
+        let result = part_one(&advent_of_code::template::read_file("examples", DAY)).unwrap();
         println!("{}", result);
+        assert_eq!(result, 2);
     }
 
     #[test]
     fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("inputs", DAY));
-        println!("{}", result.unwrap());
+        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
+        println!("{:?}", result);
+        assert_eq!(result, Some(4));
     }
 }
