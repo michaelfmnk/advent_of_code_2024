@@ -2,6 +2,7 @@
 /// The approach taken is similar to how `aoc-readme-stars` handles this.
 use std::{fs, io};
 
+
 use crate::template::timings::Timings;
 use crate::template::Day;
 

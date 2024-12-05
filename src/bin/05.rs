@@ -1,6 +1,6 @@
 use itertools::Itertools;
 use std::cmp::Ordering::{Equal, Greater, Less};
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::HashMap;
 use std::num::ParseIntError;
 
 advent_of_code::solution!(5);

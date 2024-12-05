@@ -4,6 +4,7 @@ use std::{
     process::{Command, Output, Stdio},
 };
 
+
 use crate::template::Day;
 
 #[derive(Debug)]

@@ -59,5 +59,4 @@ mod tests {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY)).unwrap();
         assert_eq!(result, 76056);
     }
-    
 }

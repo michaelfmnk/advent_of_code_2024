@@ -1,9 +1,7 @@
 advent_of_code::solution!(3);
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let result = extract_tuples(input).iter()
-        .map(|(x, y)| x * y)
-        .sum();
+    let result = extract_tuples(input).iter().map(|(x, y)| x * y).sum();
     Some(result)
 }
 
