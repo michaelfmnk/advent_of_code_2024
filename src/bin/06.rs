@@ -10,13 +10,13 @@ pub fn part_one(input: &str) -> Option<u32> {
     Some(game.count_visited() as u32)
 }
 
-pub fn part_two(_input: &str) -> Option<u32> {
-    let mut game = initialize_game(_input);
+pub fn part_two(input: &str) -> Option<u32> {
+    let mut game = initialize_game(input);
     let mut counter = 0;
 
     for (y, row) in game.map.iter().enumerate() {
-        for (x, cell) in row.iter().enumerate() {
-            if *cell == '.' {
+        for (x, _) in row.iter().enumerate() {
+            if game.is_empty((x, y)) {
                 let mut game = game.clone();
                 game.set_barrier_at((x, y));
 

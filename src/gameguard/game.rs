@@ -1,3 +1,4 @@
+use std::collections::hash_map::Iter;
 use crate::gameguard::direction;
 use std::fmt::Display;
 
@@ -50,10 +51,6 @@ impl Game {
         self.map[y][x] = self.direction.to_symbol();
     }
 
-    fn is_visited(&self, (x, y): (usize, usize)) -> bool {
-        self.map[y][x] == Self::VISITED
-    }
-
     fn is_outside(&self, &(x, y): &(isize, isize)) -> bool {
         x < 0 || y < 0 || y >= self.map.len() as isize || x >= self.map[0].len() as isize
     }
@@ -64,6 +61,10 @@ impl Game {
 
     pub fn set_barrier_at(&mut self, (x, y): (usize, usize)) {
         self.map[y][x] = Self::BARRIER;
+    }
+
+    pub fn is_empty(&self, (x, y): (usize, usize)) -> bool {
+        self.map[y][x] == Self::EMPTY
     }
 }
 
