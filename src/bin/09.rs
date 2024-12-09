@@ -5,19 +5,9 @@ use itertools::Itertools;
 advent_of_code::solution!(9);
 
 pub fn part_one(input: &str) -> Option<u128> {
-    let start = std::time::Instant::now();
     let expanded = expand(input).ok()?;
-    println!("expand took {:?}", start.elapsed());
-
-    let start = std::time::Instant::now();
     let compacted = compact(&expanded);
-    println!("compact took {:?}", start.elapsed());
-
-    let start = std::time::Instant::now();
     let result = checksum(&compacted);
-    println!("checksum took {:?}", start.elapsed());
-
-    println!("{}", result);
     Some(result)
 }
 
