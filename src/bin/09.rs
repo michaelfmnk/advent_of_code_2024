@@ -2,7 +2,7 @@ use std::ops::Div;
 
 advent_of_code::solution!(9);
 
-pub fn part_one(input: &str) -> Option<u32> {
+pub fn part_one(input: &str) -> Option<u128> {
     let expanded = expand(input).ok()?;
     println!("{}", expanded);
 
@@ -12,7 +12,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     let result = checksum(&compacted);
     println!("{}", result);
 
-    Some(result as u32)
+    Some(result)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
