@@ -50,7 +50,7 @@ impl Map {
     }
 
     fn mark_antinodes_common(&mut self, extending: bool) {
-        let mut pairs = self.antennas_combinations();
+        let pairs = self.antennas_combinations();
 
         for (_, (x1, y1), (x2, y2)) in pairs {
             if extending {

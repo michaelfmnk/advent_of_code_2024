@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::ops::{Div, Index};
+use std::ops::Div;
 use std::string::String;
 
 advent_of_code::solution!(9);
@@ -36,7 +36,7 @@ fn expand(input: &str) -> Result<Vec<Option<usize>>, String> {
 
 fn compact(input: &[Option<usize>]) -> Vec<Option<usize>> {
     let mut result = input.to_vec();
-    let mut empty_positions: Vec<_> = result.iter().positions(Option::is_none).collect();
+    let empty_positions: Vec<_> = result.iter().positions(Option::is_none).collect();
     let mut non_empty_values: Vec<_> = input.iter().filter_map(|&ch| ch).collect();
 
     for &pos in empty_positions.iter() {
@@ -64,7 +64,12 @@ fn compact_by_blocks(input: &Vec<Option<usize>>) -> Vec<Option<usize>> {
     result
 }
 
-fn move_chunk(result: &mut Vec<Option<usize>>, src_from: &usize, src_end: &usize, dest_from: usize) {
+fn move_chunk(
+    result: &mut Vec<Option<usize>>,
+    src_from: &usize,
+    src_end: &usize,
+    dest_from: usize,
+) {
     let chunk_len = src_end - src_from + 1;
     let slice: Vec<_> = result[*src_from..=*src_end].to_vec();
 
@@ -106,7 +111,7 @@ fn find_first_empty_block(
         .group_by(|&(_, ch)| ch.is_none())
         .into_iter()
         .filter(|(is_none, _)| *is_none)
-        .map(|(is_none, group)| {
+        .map(|(_, group)| {
             let indices: Vec<_> = group.map(|(index, _)| index).collect();
             let start = indices[0];
             let end = indices[indices.len() - 1];

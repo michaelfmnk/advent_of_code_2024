@@ -1,6 +1,5 @@
 use advent_of_code::gameguard::direction::Direction;
 use advent_of_code::gameguard::game::Game;
-use std::fmt::Display;
 
 advent_of_code::solution!(6);
 
@@ -11,7 +10,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut game = initialize_game(input);
+    let game = initialize_game(input);
     let mut counter = 0;
 
     for (y, row) in game.map.iter().enumerate() {
