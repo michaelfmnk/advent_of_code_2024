@@ -19,6 +19,8 @@ pub fn part_two(input: &str) -> Option<u32> {
                 let mut game = game.clone();
                 game.set_barrier_at((x, y));
 
+                // TODO: rewrite this to use 2 running pointers with different speeds
+                // and check if they meet at some point - this will be the loop.
                 let mut loop_limit = 4973 * 5;
                 while game.move_forward() && loop_limit > 0 {
                     loop_limit -= 1;
