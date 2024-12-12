@@ -19,7 +19,7 @@ pub fn part_two(input: &str) -> Option<i32> {
 
     let result = list1
         .iter()
-        .map(|x| *x * list2_freq.get(&x).unwrap_or(&0))
+        .map(|x| *x * list2_freq.get(x).unwrap_or(&0))
         .sum();
 
     Some(result)

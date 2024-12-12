@@ -45,7 +45,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     Some(result as u32)
 }
 
-fn possible_xmas_middle_point(p0: &Vec<Vec<char>>, p1: (usize, usize)) -> bool {
+fn possible_xmas_middle_point(p0: &[Vec<char>], p1: (usize, usize)) -> bool {
     let (x, y) = p1;
     p0[x][y] == 'A' && x > 0 && y > 0 && x < p0.len() - 1 && y < p0[0].len() - 1
 }

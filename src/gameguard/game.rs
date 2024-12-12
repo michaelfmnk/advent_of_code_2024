@@ -83,7 +83,7 @@ impl Clone for Game {
     fn clone(&self) -> Game {
         Game {
             map: self.map.clone(),
-            position: self.position.clone(),
+            position: self.position,
             direction: self.direction.clone(),
         }
     }

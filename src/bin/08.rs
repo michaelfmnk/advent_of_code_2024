@@ -63,15 +63,15 @@ impl Map {
                 let mut x = x1 as isize;
                 let mut y = y1 as isize;
                 while self.mark_antinode(x, y) {
-                    x = x - dx;
-                    y = y - dy;
+                    x -= dx;
+                    y -= dy;
                 }
 
                 let mut x = x2 as isize;
                 let mut y = y2 as isize;
                 while self.mark_antinode(x, y) {
-                    x = x + dx;
-                    y = y + dy;
+                    x += dx;
+                    y += dy;
                 }
             } else {
                 let dx = x2 as isize - x1 as isize;

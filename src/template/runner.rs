@@ -6,7 +6,6 @@ use std::process::Output;
 use std::time::{Duration, Instant};
 use std::{cmp, env, process};
 
-
 use crate::template::ANSI_BOLD;
 use crate::template::{aoc_cli, Day, ANSI_ITALIC, ANSI_RESET};
 

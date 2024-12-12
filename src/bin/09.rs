@@ -47,8 +47,8 @@ fn compact(input: &[Option<usize>]) -> Vec<Option<usize>> {
     result
 }
 
-fn compact_by_blocks(input: &Vec<Option<usize>>) -> Vec<Option<usize>> {
-    let mut result = input.clone();
+fn compact_by_blocks(input: &[Option<usize>]) -> Vec<Option<usize>> {
+    let mut result = input.to_owned();
     let letter_chunks: Vec<_> = find_letter_chunks(&result);
 
     for (chunk_len, (chunk_start, chunk_end)) in letter_chunks.iter().rev() {
@@ -64,12 +64,7 @@ fn compact_by_blocks(input: &Vec<Option<usize>>) -> Vec<Option<usize>> {
     result
 }
 
-fn move_chunk(
-    result: &mut Vec<Option<usize>>,
-    src_from: &usize,
-    src_end: &usize,
-    dest_from: usize,
-) {
+fn move_chunk(result: &mut [Option<usize>], src_from: &usize, src_end: &usize, dest_from: usize) {
     let chunk_len = src_end - src_from + 1;
     let slice: Vec<_> = result[*src_from..=*src_end].to_vec();
 
@@ -82,7 +77,7 @@ fn move_chunk(
     result[dest_from..dest_from + chunk_len].copy_from_slice(&slice);
 }
 
-fn find_letter_chunks(input: &Vec<Option<usize>>) -> Vec<(usize, (usize, usize))> {
+fn find_letter_chunks(input: &[Option<usize>]) -> Vec<(usize, (usize, usize))> {
     input
         .iter()
         .enumerate()
@@ -117,8 +112,7 @@ fn find_first_empty_block(
             let end = indices[indices.len() - 1];
             (indices.len(), (start, end))
         })
-        .filter(|&(empty_len, _)| empty_len >= min_length)
-        .next()
+        .find(|&(empty_len, _)| empty_len >= min_length)
 }
 
 fn checksum(input: &[Option<usize>]) -> u128 {

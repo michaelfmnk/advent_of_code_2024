@@ -51,7 +51,7 @@ fn initialize_game(input: &str) -> Game {
     }
 }
 
-fn find_pawn(map: &Vec<Vec<char>>) -> Option<((usize, usize), Direction)> {
+fn find_pawn(map: &[Vec<char>]) -> Option<((usize, usize), Direction)> {
     map.iter()
         .enumerate()
         .find_map(|(y, row)| {

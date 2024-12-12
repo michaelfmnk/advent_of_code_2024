@@ -11,18 +11,18 @@ pub fn part_one(input: &str) -> Option<usize> {
 pub fn part_two(input: &str) -> Option<usize> {
     let result = read_input(input)
         .into_iter()
-        .filter(|report| is_safe_skipping_one(&report))
+        .filter(|report| is_safe_skipping_one(report))
         .count();
     Some(result)
 }
 
-fn is_safe(report: &Vec<i32>) -> bool {
+fn is_safe(report: &[i32]) -> bool {
     let check_asc = || report.is_sorted_by(|a, b| a < b && a.abs_diff(*b) <= 3);
     let check_desc = || report.is_sorted_by(|a, b| a > b && a.abs_diff(*b) <= 3);
     check_asc() || check_desc()
 }
 
-fn is_safe_skipping_one(report: &Vec<i32>) -> bool {
+fn is_safe_skipping_one(report: &[i32]) -> bool {
     if is_safe(report) {
         return true;
     }

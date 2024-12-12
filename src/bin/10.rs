@@ -7,10 +7,12 @@ advent_of_code::solution!(10);
 pub fn part_one(input: &str) -> Option<usize> {
     let reachability = compute_reachability_map(input);
 
-    Some(reachability
-        .values()
-        .map(|positions| positions.iter().unique().count())
-        .sum())
+    Some(
+        reachability
+            .values()
+            .map(|positions| positions.iter().unique().count())
+            .sum(),
+    )
 }
 
 pub fn part_two(input: &str) -> Option<usize> {
