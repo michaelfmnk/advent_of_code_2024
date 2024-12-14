@@ -32,11 +32,8 @@ pub fn part_two(input: &str) -> Option<usize> {
                 continue;
             }
 
-            println!("Looking at {}", input[x][y]);
             let new_visited = fill(&input, (x, y));
-            // println!("VISITED: {:?}", new_visited);
             result += calculate_area(&new_visited) * calculate_sides(&new_visited);
-
             merge_visited(&mut visited, new_visited);
         }
     }
@@ -111,15 +108,6 @@ fn calculate_perimeter(visited: &[Vec<bool>]) -> usize {
     perimeter
 }
 
-fn print_vec(visited: &[Vec<bool>]) {
-    for row in visited {
-        for &cell in row {
-            print!("{}", if cell { "X" } else { "_" });
-        }
-        println!();
-    }
-}
-
 fn calculate_sides(visited: &[Vec<bool>]) -> usize {
     // extend visited by one cell in each direction
     let mut visited: Vec<_> = visited
@@ -134,7 +122,6 @@ fn calculate_sides(visited: &[Vec<bool>]) -> usize {
     visited.insert(0, vec![false; visited[0].len()]);
     visited.push(vec![false; visited[0].len()]);
 
-    // scan from left to right
     let mut result = 0;
 
     let mut ltr = 0;
@@ -150,7 +137,6 @@ fn calculate_sides(visited: &[Vec<bool>]) -> usize {
             is_prev_edge = is_edge;
         }
     }
-    println!("LTR: {}", ltr);
     result += ltr;
 
     let mut rtl = 0;
@@ -167,7 +153,6 @@ fn calculate_sides(visited: &[Vec<bool>]) -> usize {
         }
     }
 
-    println!("RTL: {}", rtl);
     result += rtl;
 
     let mut ttb = 0;
@@ -179,15 +164,12 @@ fn calculate_sides(visited: &[Vec<bool>]) -> usize {
 
             if is_edge && !is_prev_edge {
                 ttb += 1;
-                println!("FIRST EDGE: ({}, {})", i, j);
             }
 
             is_prev_edge = is_edge;
         }
     }
-    println!("TTB: {}", ttb);
     result += ttb;
-
 
     let mut btt = 0;
     for i in (0..visited.len()).rev() {
@@ -198,15 +180,12 @@ fn calculate_sides(visited: &[Vec<bool>]) -> usize {
 
             if is_edge && !is_prev_edge {
                 btt += 1;
-                println!("FIRST EDGE: ({}, {})", i, j);
             }
 
             is_prev_edge = is_edge;
         }
     }
-    println!("BTT: {}", btt);
     result += btt;
-
     result
 }
 
@@ -234,13 +213,3 @@ mod tests {
         assert_eq!(result, None);
     }
 }
-// RRRRIICCFF
-// RRRRIICCCF
-// VVRRRCCFFF
-// VVRCCCJFFF
-// VVVVCJJCFE
-// VVIVCCJJEE
-// VVIIICJJEE
-// MIIIIIJJEE
-// MIIISIJEEE
-// MMMISSJEEE
