@@ -1,4 +1,5 @@
 use std::fmt::{Display, Formatter};
+use std::io::Write;
 
 advent_of_code::solution!(14);
 
@@ -16,6 +17,22 @@ pub fn part_one(input: &str) -> Option<usize> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
+    let mut file = std::fs::File::create("output.txt").unwrap();
+
+    let mut map = Map::new(input, (101, 103));
+
+
+    for i in 1..10_000 {
+        map = map.move_guards();
+        let (q1, q2, q3, q4) = map.count_quadrants();
+
+        let randomnesss = q1 * q2 * q3 * q4;
+        if randomnesss < 95779830 {
+            writeln!(file, "After {} seconds, randomness {}:", i, randomnesss).unwrap();
+            writeln!(file, "{}", map).unwrap();
+        }
+    }
+
     None
 }
 
