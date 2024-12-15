@@ -29,5 +29,6 @@ tinyjson = "2.5.1"
 itertools = "0.13.0"
 regex = "1.11.1"
 fancy-regex = "0.14.0"
+colored = "2.2.0"
 
 # Solution dependencies

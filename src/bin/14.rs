@@ -27,7 +27,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         let (q1, q2, q3, q4) = map.count_quadrants();
 
         let randomnesss = q1 * q2 * q3 * q4;
-        if randomnesss < 95779830 {
+        if randomnesss < 95_779_830 {
             writeln!(file, "After {} seconds, randomness {}:", i, randomnesss).unwrap();
             writeln!(file, "{}", map).unwrap();
         }
